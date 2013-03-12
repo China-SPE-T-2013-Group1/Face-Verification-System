@@ -4,8 +4,6 @@
 #include "opencv2/highgui/highgui.hpp"
 using namespace cv;
 
-//Mat src1, src2, dst;
-
 namespace FaceVerificationSystem {
 
 	using namespace System;

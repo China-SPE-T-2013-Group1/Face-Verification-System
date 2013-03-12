@@ -1,4 +1,4 @@
-﻿Build started 12/03/2013 14:22:23.
+﻿Build started 12/03/2013 23:05:52.
      1>Project "C:\Documents and Settings\admin\Mes documents\Visual Studio 2010\Projects\Face-Verification-System\Face-Verification-System.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Face-Verification-System.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,19 +6,11 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Face-Verification-System.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt fisherfaces.cpp tools.cpp /clr:nostdlib 
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Face-Verification-System.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt fisherfaces.cpp /clr:nostdlib 
          fisherfaces.cpp
-         tools.cpp
-     1>tools.cpp(40): warning C4018: '<' : incompatibilité signed/unsigned
-         Génération de code en cours...
-     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(381): warning C4793: 'cv::Mat::release' : fonction compilée en tant que code natif :
-         	un intrinsèque non pris en charge a été trouvé dans le code managé
-     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(2092): warning C4793: 'cv::SparseMat::addref' : fonction compilée en tant que code natif :
-         	un intrinsèque non pris en charge a été trouvé dans le code managé
-     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(115): warning C4793: 'cv::Mat::Mat' : fonction compilée en tant que code natif :
-         	un intrinsèque non pris en charge a été trouvé dans le code managé
-     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(305): warning C4793: 'cv::Mat::operator=' : fonction compilée en tant que code natif :
-         	un intrinsèque non pris en charge a été trouvé dans le code managé
+     1>c:\documents and settings\admin\mes documents\visual studio 2010\projects\face-verification-system\eigenvalueDecomposition.h(80): warning C4554: '|' : vérifiez la priorité des opérateurs comme cause possible d'erreur ; utilisez des parenthèses pour rendre plus claires les priorités
+     1>c:\documents and settings\admin\mes documents\visual studio 2010\projects\face-verification-system\eigenvalueDecomposition.h(442): warning C4554: '&' : vérifiez la priorité des opérateurs comme cause possible d'erreur ; utilisez des parenthèses pour rendre plus claires les priorités
+     1>c:\documents and settings\admin\mes documents\visual studio 2010\projects\face-verification-system\eigenvalueDecomposition.h(480): warning C4554: '|' : vérifiez la priorité des opérateurs comme cause possible d'erreur ; utilisez des parenthèses pour rendre plus claires les priorités
      1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(381): warning C4793: 'cv::Mat::release' : fonction compilée en tant que code natif :
          	un intrinsèque non pris en charge a été trouvé dans le code managé
      1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(2092): warning C4793: 'cv::SparseMat::addref' : fonction compilée en tant que code natif :
@@ -36,6 +28,7 @@
          Debug\eigenfaces.obj
          "Debug\Face-Verification-System.obj"
          Debug\fisherfaces.obj
+         Debug\lda.obj
          Debug\stdafx.obj
          Debug\tools.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
@@ -49,4 +42,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.70
+Time Elapsed 00:00:04.96

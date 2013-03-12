@@ -4,6 +4,34 @@
 using namespace cv;
 #include "tools.h"
 
+void sortMatrixColumnsByIndices(const Mat& src, const vector<int>& indices, Mat& dst)
+{
+    dst.create(src.rows, src.cols, src.type());
+    for(int idx = 0; idx < indices.size(); idx++) {
+        Mat originalCol = src.col(indices[idx]);
+        Mat sortedCol = dst.col(idx);
+        originalCol.copyTo(sortedCol);
+    }
+}
+
+Mat sortMatrixColumnsByIndices(const Mat&  src, const vector<int>& indices)
+{
+    Mat dst;
+    sortMatrixColumnsByIndices(src, indices, dst);
+    return dst;
+}
+
+vector<int> argsort(const Mat& src, bool ascending)
+{
+    if (src.rows != 1 && src.cols != 1) {
+        CV_Error(CV_StsBadArg, "cv::argsort only sorts 1D matrices.");
+    }
+    int flags = CV_SORT_EVERY_ROW+(ascending ? CV_SORT_ASCENDING : CV_SORT_DESCENDING);
+    vector<int> sorted_indices;
+    cv::sortIdx(src.reshape(1,1), sorted_indices, flags);
+    return sorted_indices;
+}
+
 vector<Mat> openTrainingSet(string name)
 {
 	int imageNumberInt = 1;

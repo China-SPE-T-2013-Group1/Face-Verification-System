@@ -92,6 +92,7 @@
     <ClCompile Include="eigenfaces.cpp" />
     <ClCompile Include="Face-Verification-System.cpp" />
     <ClCompile Include="fisherfaces.cpp" />
+    <ClCompile Include="lda.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -100,10 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="eigenfaces.h" />
+    <ClInclude Include="EigenvalueDecomposition.h" />
     <ClInclude Include="fisherfaces.h" />
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="lda.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tools.h" />
