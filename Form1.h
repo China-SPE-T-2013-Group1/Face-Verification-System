@@ -4,7 +4,7 @@
 #include "opencv2/highgui/highgui.hpp"
 using namespace cv;
 
-Mat src1, src2, dst;
+//Mat src1, src2, dst;
 
 namespace FaceVerificationSystem {
 
@@ -83,7 +83,7 @@ namespace FaceVerificationSystem {
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			imshow("Image 2", src2);
+
 		}
 	};
 }
