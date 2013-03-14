@@ -107,3 +107,8 @@ void LDA::compute(const Mat& src, const vector<int>& labels)
     _eigenvalues = Mat(_eigenvalues, Range::all(), Range(0, _num_components));
     _eigenvectors = Mat(_eigenvectors, Range::all(), Range(0, _num_components));
 }
+
+void compute(const vector<Mat>& src, const vector<int>& labels)
+{
+
+}

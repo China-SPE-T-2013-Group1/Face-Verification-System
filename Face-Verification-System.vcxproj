@@ -57,7 +57,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_calib3d231d.lib;opencv_contrib231d.lib;opencv_core231d.lib;opencv_features2d231d.lib;opencv_flann231d.lib;opencv_gpu231d.lib;opencv_haartraining_engined.lib;opencv_highgui231d.lib;opencv_imgproc231d.lib;opencv_legacy231d.lib;opencv_ml231d.lib;opencv_objdetect231d.lib;opencv_ts231d.lib;opencv_video231d.lib;tbb_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_calib3d231d.lib;opencv_contrib231d.lib;opencv_core231d.lib;opencv_features2d231d.lib;opencv_flann231d.lib;opencv_gpu231d.lib;opencv_haartraining_engined.lib;opencv_highgui231d.lib;opencv_imgproc231d.lib;opencv_legacy231d.lib;opencv_ml231d.lib;opencv_objdetect231d.lib;opencv_ts231d.lib;opencv_video231d.lib;tbb_debug.lib;opencv_highgui231.lib;opencv_core231.lib;opencv_imgproc231.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
@@ -89,26 +89,36 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="colormap.cpp" />
+    <ClCompile Include="decomposition.cpp" />
     <ClCompile Include="eigenfaces.cpp" />
     <ClCompile Include="Face-Verification-System.cpp" />
+    <ClCompile Include="facerec.cpp" />
     <ClCompile Include="fisherfaces.cpp" />
-    <ClCompile Include="lda.cpp" />
+    <ClCompile Include="helper.cpp" />
+    <ClCompile Include="lbp.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="subspace.cpp" />
     <ClCompile Include="tools.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="colormap.hpp" />
+    <ClInclude Include="decomposition.hpp" />
     <ClInclude Include="eigenfaces.h" />
     <ClInclude Include="EigenvalueDecomposition.h" />
+    <ClInclude Include="facerec.hpp" />
     <ClInclude Include="fisherfaces.h" />
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="lda.h" />
+    <ClInclude Include="helper.hpp" />
+    <ClInclude Include="lbp.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="subspace.hpp" />
     <ClInclude Include="tools.h" />
   </ItemGroup>
   <ItemGroup>
