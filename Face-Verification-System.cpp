@@ -10,7 +10,9 @@
 using namespace FaceVerificationSystem;
 using namespace std;
 
-Mat src1, src2, dst;
+//Mat frame;
+//Mat capture;
+//VideoCapture cap(0);
 
 [STAThreadAttribute]
 
@@ -20,34 +22,33 @@ int main(array<System::String ^> ^args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false); 
 
+	// Creation of the video capture
+	//VideoCapture cap(0);
+	//if (!cap.isOpened()) return -1;
+
+	//Mat frame;
+	//Mat capture;
+	//static CvMat *eigenVec, *eigenVal;
+	//namedWindow("Webcam", 1);
+	//namedWindow("Capture", 1);
+
 	// Create the main window and run it
 	Application::Run(gcnew Form1());
 
 	// Test of fisherfaces
 	test();
 
-	// Creation of the video capture
-	VideoCapture cap(0);
-	if (!cap.isOpened()) return -1;
-
-	Mat frame;
-	Mat capture;
-	static CvMat *eigenVec, *eigenVal;
-	namedWindow("Webcam", 1);
-	namedWindow("Capture", 1);
-
-	for(;;)
+	//for(;;)
 	{
-		cap >> frame;
+	/*	cap >> frame;
 		imshow("Webcam", frame);
 		if (waitKey(30) >= 0) 
 		{
 			capture = frame;
 			imshow("Capture", capture);
-		}
+		}*/
 	}
 
 	waitKey(0);
 	return 0;
-
 }

@@ -1,12 +1,21 @@
-﻿Build started 15/03/2013 13:32:54.
+﻿Build started 15/03/2013 16:07:00.
      1>Project "C:\Documents and Settings\admin\Mes documents\Visual Studio 2010\Projects\Face-Verification-System\Face-Verification-System.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\Face-Verification-System.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\Face-Verification-System.unsuccessfulbuild".
        GenerateTargetFrameworkMonikerAttribute:
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         All outputs are up-to-date.
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Face-Verification-System.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt "Face-Verification-System.cpp" /clr:nostdlib 
+         Face-Verification-System.cpp
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(381): warning C4793: 'cv::Mat::release' : fonction compilée en tant que code natif :
+         	un intrinsèque non pris en charge a été trouvé dans le code managé
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(2092): warning C4793: 'cv::SparseMat::addref' : fonction compilée en tant que code natif :
+         	un intrinsèque non pris en charge a été trouvé dans le code managé
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(115): warning C4793: 'cv::Mat::Mat' : fonction compilée en tant que code natif :
+         	un intrinsèque non pris en charge a été trouvé dans le code managé
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(305): warning C4793: 'cv::Mat::operator=' : fonction compilée en tant que code natif :
+         	un intrinsèque non pris en charge a été trouvé dans le code managé
          All outputs are up-to-date.
        CoreResGen:
          "C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,Debug\FaceVerificationSystem.Form1.resources
@@ -39,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.85
+Time Elapsed 00:00:12.59

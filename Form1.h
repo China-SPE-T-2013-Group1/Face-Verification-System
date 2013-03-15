@@ -4,8 +4,12 @@
 #include "opencv2/highgui/highgui.hpp"
 using namespace cv;
 
-namespace FaceVerificationSystem {
+static Mat frame;
+static Mat capture;
+static VideoCapture cap(0);
 
+namespace FaceVerificationSystem
+{
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -16,6 +20,8 @@ namespace FaceVerificationSystem {
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
+	//int a;
+
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
 	public:
@@ -26,7 +32,7 @@ namespace FaceVerificationSystem {
 			//TODO: Add the constructor code here
 			//
 		}
-
+		
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -39,13 +45,14 @@ namespace FaceVerificationSystem {
 			}
 		}
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
 	protected: 
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -54,18 +61,25 @@ namespace FaceVerificationSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(63, 65);
+			this->button1->Location = System::Drawing::Point(12, 12);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(89, 92);
+			this->button1->Size = System::Drawing::Size(91, 52);
 			this->button1->TabIndex = 0;
-			this->button1->Text = L"button1";
+			this->button1->Text = L"Test";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// timer1
+			// 
+			this->timer1->Enabled = true;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
 			// Form1
 			// 
@@ -74,7 +88,7 @@ namespace FaceVerificationSystem {
 			this->ClientSize = System::Drawing::Size(292, 266);
 			this->Controls->Add(this->button1);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"Face verification system";
 			this->ResumeLayout(false);
 
 		}
@@ -83,6 +97,15 @@ namespace FaceVerificationSystem {
 		{
 
 		}
+	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
+			 {
+					cap >> frame;
+					imshow("Webcam", frame);
+					if (waitKey(30) >= 0) 
+					{
+						capture = frame;
+						imshow("Capture", capture);
+					}
+			 }
 	};
 }
-
