@@ -3,7 +3,6 @@
 
 #include "opencv2/core/core.hpp"
 
-
 #include "colormap.hpp"
 #include "subspace.hpp"
 #include "helper.hpp"

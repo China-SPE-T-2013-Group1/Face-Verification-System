@@ -9,16 +9,31 @@ using namespace std;
 #include <vector>
 #include <set>
 #include "facerec.hpp"
+#include <windows.h>
 
 void test()
 {
-	vector<Mat> test = openTrainingSet("Alexis");
+	vector<Mat> images = openTrainingSet("Alexis");
 
-	// Build a matrix with the observations in row:
-    Mat data = asRowMatrix(test, CV_32FC1);
-  
-	// Number of components to keep for the PCA:
+	// Number of components
     int num_components = 3;
 
 	Fisherfaces fisherTest = Fisherfaces();
+	vector<int> labels;
+	labels.push_back(0);
+	labels.push_back(1);
+	labels.push_back(1);
+	labels.push_back(1);
+	Fisherfaces Fisherfaces(images, labels, num_components);
+
+	Mat testImage = imread("Training set/Alexis/2.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+	int a = Fisherfaces.predict(testImage);
+	if (a == 0)
+	{
+		MessageBox(NULL, L"0", L"", MB_OK);
+	}
+	if (a == 1)
+	{
+		MessageBox(NULL, L"1", L"", MB_OK);
+	}
 }
