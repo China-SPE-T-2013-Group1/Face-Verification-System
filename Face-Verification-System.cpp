@@ -22,22 +22,8 @@ int main(array<System::String ^> ^args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false); 
 
-	// Creation of the video capture
-	//VideoCapture cap(0);
-	//if (!cap.isOpened()) return -1;
-
-	//Mat frame;
-	//Mat capture;
-	//static CvMat *eigenVec, *eigenVal;
-	//namedWindow("Webcam", 1);
-	//namedWindow("Capture", 1);
-
 	// Create the main window and run it
 	Application::Run(gcnew Form1());
 
-	// Test of fisherfaces
-	test();
-
-	waitKey(0);
 	return 0;
 }

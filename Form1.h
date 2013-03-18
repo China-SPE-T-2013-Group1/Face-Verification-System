@@ -9,9 +9,12 @@ using namespace cv;
 static Mat frame;
 static Mat capture;
 static VideoCapture cap(0);
-static Eigenfaces eigenFace;
-static Fisherfaces fisherFace;
+static vector<Mat> images = openTrainingSet("Alexis");
+static int v[4] = {0,1,1,1};
+static vector<int> labels(begin(v), end(v));
 static int num_components = 3;
+static Eigenfaces eigenFace(images, labels, num_components);
+static Fisherfaces fisherFace(images, labels, num_components);
 
 namespace FaceVerificationSystem
 {
@@ -33,16 +36,6 @@ namespace FaceVerificationSystem
 		Form1(void)
 		{
 			InitializeComponent();
-
-			vector<Mat> images = openTrainingSet("Alexis");
-
-			vector<int> labels;
-			labels.push_back(0);
-			labels.push_back(1);
-			labels.push_back(1);
-			labels.push_back(1);
-
-			fisherFace.train(images, labels, num_components);
 		}
 		
 	protected:
@@ -127,6 +120,8 @@ namespace FaceVerificationSystem
 			// 
 			// recognitionTimer
 			// 
+			this->recognitionTimer->Enabled = true;
+			this->recognitionTimer->Interval = 1000;
 			this->recognitionTimer->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick_1);
 			// 
 			// Form1
@@ -147,7 +142,7 @@ namespace FaceVerificationSystem
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-
+			imwrite( "Gray_Image.jpg", frame );
 		}
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 			 {
@@ -161,8 +156,15 @@ namespace FaceVerificationSystem
 			 }
 	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
 			 }
-private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e) {
-
+private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e)
+		 {
+			cap >> frame;
+			
+			Mat testImage;
+			cv::cvtColor(frame, testImage, CV_RGB2GRAY);
+			
+			label1->Text = "Eigenfaces results: " + Convert::ToString(eigenFace.predict(testImage));
+			label2->Text = "Fisherfaces results: " + Convert::ToString(fisherFace.predict(testImage));
 		 }
 };
 }
