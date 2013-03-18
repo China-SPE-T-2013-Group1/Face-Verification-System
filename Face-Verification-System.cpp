@@ -38,17 +38,6 @@ int main(array<System::String ^> ^args)
 	// Test of fisherfaces
 	test();
 
-	//for(;;)
-	{
-	/*	cap >> frame;
-		imshow("Webcam", frame);
-		if (waitKey(30) >= 0) 
-		{
-			capture = frame;
-			imshow("Capture", capture);
-		}*/
-	}
-
 	waitKey(0);
 	return 0;
 }

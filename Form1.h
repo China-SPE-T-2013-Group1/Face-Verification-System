@@ -2,11 +2,15 @@
 
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include "facerec.hpp"
 using namespace cv;
 
 static Mat frame;
 static Mat capture;
 static VideoCapture cap(0);
+Eigenfaces eigenFace();
+Fisherfaces fisherFace();
+static int num_components = 3;
 
 namespace FaceVerificationSystem
 {
@@ -28,9 +32,14 @@ namespace FaceVerificationSystem
 		Form1(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+
+			vector<int> labels;
+			labels.push_back(0);
+			labels.push_back(1);
+			labels.push_back(1);
+			labels.push_back(1);
+
+		//	fisherFace.train(images, labels, nul_components);
 		}
 		
 	protected:
@@ -45,7 +54,12 @@ namespace FaceVerificationSystem
 			}
 		}
 	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Timer^  timer1;
+	private: System::Windows::Forms::Timer^  aquisitionTimer;
+
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Timer^  recognitionTimer;
+
 	private: System::ComponentModel::IContainer^  components;
 	protected: 
 
@@ -63,33 +77,68 @@ namespace FaceVerificationSystem
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->aquisitionTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->recognitionTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(12, 12);
+			this->button1->Location = System::Drawing::Point(202, 95);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(91, 52);
+			this->button1->Size = System::Drawing::Size(110, 38);
 			this->button1->TabIndex = 0;
-			this->button1->Text = L"Test";
+			this->button1->Text = L"Train";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
-			// timer1
+			// aquisitionTimer
 			// 
-			this->timer1->Enabled = true;
-			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
+			this->aquisitionTimer->Enabled = true;
+			this->aquisitionTimer->Interval = 200;
+			this->aquisitionTimer->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(13, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(163, 20);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Eigenfaces results:";
+			this->label1->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(14, 46);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(167, 20);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Fisherfaces results:";
+			// 
+			// recognitionTimer
+			// 
+			this->recognitionTimer->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick_1);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(292, 266);
+			this->ClientSize = System::Drawing::Size(330, 152);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Form1";
 			this->Text = L"Face verification system";
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -107,5 +156,10 @@ namespace FaceVerificationSystem
 						imshow("Capture", capture);
 					}
 			 }
-	};
+	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 }
+private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e) {
+
+		 }
+};
 }
