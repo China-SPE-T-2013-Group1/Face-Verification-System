@@ -3,13 +3,14 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "facerec.hpp"
+#include "tools.h"
 using namespace cv;
 
 static Mat frame;
 static Mat capture;
 static VideoCapture cap(0);
-Eigenfaces eigenFace();
-Fisherfaces fisherFace();
+static Eigenfaces eigenFace;
+static Fisherfaces fisherFace;
 static int num_components = 3;
 
 namespace FaceVerificationSystem
@@ -33,13 +34,15 @@ namespace FaceVerificationSystem
 		{
 			InitializeComponent();
 
+			vector<Mat> images = openTrainingSet("Alexis");
+
 			vector<int> labels;
 			labels.push_back(0);
 			labels.push_back(1);
 			labels.push_back(1);
 			labels.push_back(1);
 
-		//	fisherFace.train(images, labels, nul_components);
+			fisherFace.train(images, labels, num_components);
 		}
 		
 	protected:

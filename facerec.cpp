@@ -2,7 +2,6 @@
 #include "facerec.hpp"
 #include "helper.hpp"
 #include "decomposition.hpp"
-
 #include "opencv2/imgproc/imgproc.hpp"
 
 //------------------------------------------------------------------------------
@@ -23,7 +22,6 @@ void cv::FaceRecognizer::load(const string& filename) {
     this->load(fs);
     fs.release();
 }
-
 
 //------------------------------------------------------------------------------
 // cv::Eigenfaces
@@ -192,7 +190,6 @@ int cv::Fisherfaces::predict(InputArray _src) const {
     predict(_src, label, dummy);
     return label;
 }
-
 
 void cv::Fisherfaces::predict(InputArray _src, int &minClass, double &minDist) const {
     Mat src = _src.getMat();
