@@ -7,7 +7,6 @@
 using namespace cv;
 
 static Mat frame;
-static Mat capture;
 static VideoCapture cap(0);
 static vector<Mat> images = openTrainingSet("Test");
 static int v[26] = {0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,4};
@@ -150,8 +149,7 @@ namespace FaceVerificationSystem
 					imshow("Webcam", frame);
 					if (waitKey(30) >= 0) 
 					{
-						capture = frame;
-						imshow("Capture", capture);
+						imshow("Capture", frame);
 					}
 			 }
 	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
