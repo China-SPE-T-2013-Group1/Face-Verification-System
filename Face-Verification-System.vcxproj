@@ -41,9 +41,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\Program Files\opencv\build\common\tbb30_20110427oss\include;C:\Program Files\opencv\build\include\opencv;C:\Program Files\opencv\build\include\opencv2;C:\Program Files\opencv\build\include;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\Program Files\opencv\include;C:\Program Files\opencv\include\opencv;C:\Program Files\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\opencv\build\common\tbb30_20110427oss\lib\ia32\vc10;C:\Program Files\opencv\build\x86\vc10\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>D:\Projets\openCV\opencv\build\common\tbb30_20110427oss\include;D:\Projets\openCV\opencv\build\include\opencv;D:\Projets\openCV\opencv\build\include\opencv2;D:\Projets\openCV\opencv\build\include;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>D:\Projets\openCV\opencv\include;D:\Projets\openCV\opencv\include\opencv;D:\Projets\openCV\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Projets\openCV\opencv\build\common\tbb30_20110427oss\lib\ia32\vc10;D:\Projets\openCV\opencv\build\x86\vc10\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
