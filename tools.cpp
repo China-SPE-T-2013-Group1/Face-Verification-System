@@ -24,3 +24,7 @@ vector<Mat> openTrainingSet(string name)
 	Mat a;
 	return out;
 }
+
+int Testgit () {
+	return 0;
+}
