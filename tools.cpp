@@ -3,7 +3,11 @@
 #include "opencv2/highgui/highgui.hpp"
 using namespace cv;
 #include "tools.h"
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
 
+//Function which returns a matrix containing the imagages contained in a SINGLE folder
 vector<Mat> openTrainingSet(string name)
 {
 	int imageNumberInt = 1;
@@ -25,6 +29,29 @@ vector<Mat> openTrainingSet(string name)
 	return out;
 }
 
-int Testgit () {
-	return 0;
+// Function does not work but need to be implemented afterwards
+/*void testSystem() {
+
+	system("dir C:\ > C:\Users\Tof\Desktop\toto");
 }
+*/
+
+// Function to count the number of images in a folder
+int noOfImages(string name) {
+	
+	int imageNumberInt = 1;
+	Mat image;
+	char imageNumberString[4];
+	sprintf(imageNumberString, "%d", imageNumberInt);
+	image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");		
+	
+	while (image.data)
+	{
+		imageNumberInt++;
+		sprintf(imageNumberString, "%d", imageNumberInt);
+		image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");
+	}
+
+	return imageNumberInt;
+}
+

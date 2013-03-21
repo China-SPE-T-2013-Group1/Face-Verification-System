@@ -4,13 +4,19 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "facerec.hpp"
 #include "tools.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <fstream>
+
 using namespace cv;
 
 static Mat frame;
 static VideoCapture cap(0);
-static vector<Mat> images = openTrainingSet("Test");
-static int v[26] = {0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,4};
-static vector<int> labels(begin(v), end(v));
+static vector<Mat> images;
+//static int v[26] = {0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,4};
+static vector<String> names ;
+static vector<int> labels;
 static int num_components = 3;
 static Eigenfaces eigenFace(images, labels, num_components);
 static Fisherfaces fisherFace(images, labels, num_components);
@@ -35,6 +41,23 @@ namespace FaceVerificationSystem
 		Form1(void)
 		{
 			InitializeComponent();
+			string name;
+			vector<Mat> newPerson;
+			int increment;
+			fstream file ("dataBaseNames.txt");
+			while ( !file.eof() ) 
+			{
+				getline(file,name);
+				newPerson = openTrainingSet(name);
+				images.insert(images.end(),newPerson.begin(),newPerson.end());
+				for(int i=0;i < noOfImages(name); i++)
+				{
+					labels.push_back(increment);
+				}
+				names.push_back(name);
+				increment++;
+			}
+
 		}
 		
 	protected:
@@ -161,8 +184,8 @@ private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^ 
 			Mat testImage;
 			cv::cvtColor(frame, testImage, CV_RGB2GRAY);
 			
-			label1->Text = "Eigenfaces results: " + Convert::ToString(eigenFace.predict(testImage));
-			label2->Text = "Fisherfaces results: " + Convert::ToString(fisherFace.predict(testImage));
+			//label1->Text = "Eigenfaces results: " + Convert::ToString(eigenFace.predict(testImage));
+			//label2->Text = "Fisherfaces results: " + Convert::ToString(fisherFace.predict(testImage));
 		 }
 };
 }

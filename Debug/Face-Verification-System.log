@@ -1,4 +1,4 @@
-﻿Build started 19/03/2013 16:12:59.
+﻿Build started 21/03/2013 15:55:38.
      1>Project "C:\Users\Tof\Documents\INSA\5TC\Deuxième semestre\Facerecognition project\Face-Verification-System\Face-Verification-System.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Face-Verification-System.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,15 +6,40 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Face-Verification-System.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt tools.cpp /clr:nostdlib 
+         tools.cpp
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(381): warning C4793: 'cv::Mat::release' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(2092): warning C4793: 'cv::SparseMat::addref' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(115): warning C4793: 'cv::Mat::Mat' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>c:\program files\opencv\build\include\opencv2\core\mat.hpp(305): warning C4793: 'cv::Mat::operator=' : function compiled as native :
+         	Found an intrinsic not supported in managed code
          All outputs are up-to-date.
        CoreResGen:
          All outputs are up-to-date.
        ResourceCompile:
          All outputs are up-to-date.
        Link:
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Tof\Documents\INSA\5TC\Deuxième semestre\Facerecognition project\Face-Verification-System\Debug\Face-Verification-System.exe" /INCREMENTAL /NOLOGO opencv_calib3d231d.lib opencv_contrib231d.lib opencv_core231d.lib opencv_features2d231d.lib opencv_flann231d.lib opencv_gpu231d.lib opencv_haartraining_engined.lib opencv_highgui231d.lib opencv_imgproc231d.lib opencv_legacy231d.lib opencv_ml231d.lib opencv_objdetect231d.lib opencv_ts231d.lib opencv_video231d.lib tbb_debug.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\FaceVerificationSystem.Form1.resources /MANIFEST /ManifestFile:"Debug\Face-Verification-System.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Tof\Documents\INSA\5TC\Deuxième semestre\Facerecognition project\Face-Verification-System\Debug\Face-Verification-System.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
+         Debug\AssemblyInfo.obj
+         Debug\colormap.obj
+         Debug\decomposition.obj
+         Debug\eigenfaces.obj
+         "Debug\Face-Verification-System.obj"
+         Debug\facerec.obj
+         Debug\fisherfaces.obj
+         Debug\helper.obj
+         Debug\lbp.obj
+         Debug\stdafx.obj
+         Debug\subspace.obj
+         Debug\tools.obj
+         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+     1>facerec.obj : warning LNK4248: unresolved typeref token (01000017) for 'CvFileStorage'; image may not run
          Face-Verification-System.vcxproj -> C:\Users\Tof\Documents\INSA\5TC\Deuxième semestre\Facerecognition project\Face-Verification-System\Debug\Face-Verification-System.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Tof\Documents\INSA\5TC\Deuxième semestre\Facerecognition project\Face-Verification-System\Debug\Face-Verification-System.exe;#1" /manifest "Debug\Face-Verification-System.exe.intermediate.manifest"
        FinalizeBuildStatus:
          Deleting file "Debug\Face-Verification-System.unsuccessfulbuild".
          Touching "Debug\Face-Verification-System.lastbuildstate".
@@ -22,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.42
+Time Elapsed 00:00:05.07
