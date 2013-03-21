@@ -43,15 +43,14 @@ int noOfImages(string name) {
 	Mat image;
 	char imageNumberString[4];
 	sprintf(imageNumberString, "%d", imageNumberInt);
-	image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");		
+	image = imread("Training set/" + name + "/" + imageNumberString + ".jpg", CV_LOAD_IMAGE_GRAYSCALE);		
 	
 	while (image.data)
 	{
 		imageNumberInt++;
 		sprintf(imageNumberString, "%d", imageNumberInt);
-		image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");
+		image = imread("Training set/" + name + "/" + imageNumberString + ".jpg", CV_LOAD_IMAGE_GRAYSCALE);
 	}
 
-	return imageNumberInt;
+	return (imageNumberInt - 1);
 }
-

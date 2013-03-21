@@ -14,12 +14,12 @@ using namespace cv;
 static Mat frame;
 static VideoCapture cap(0);
 static vector<Mat> images;
-//static int v[26] = {0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,4};
 static vector<String> names ;
 static vector<int> labels;
 static int num_components = 3;
-static Eigenfaces eigenFace(images, labels, num_components);
-static Fisherfaces fisherFace(images, labels, num_components);
+static Eigenfaces* eigenFace;
+static Fisherfaces* fisherFace;
+
 
 namespace FaceVerificationSystem
 {
@@ -33,7 +33,6 @@ namespace FaceVerificationSystem
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
-	//int a;
 
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
@@ -43,13 +42,15 @@ namespace FaceVerificationSystem
 			InitializeComponent();
 			string name;
 			vector<Mat> newPerson;
-			int increment;
-			fstream file ("dataBaseNames.txt");
-			while ( !file.eof() ) 
+			int increment = 0;
+			
+			fstream file ("Training set/dataBaseNames.txt");
+			while ( !file.eof() )
 			{
 				getline(file,name);
 				newPerson = openTrainingSet(name);
 				images.insert(images.end(),newPerson.begin(),newPerson.end());
+				int a = noOfImages(name);
 				for(int i=0;i < noOfImages(name); i++)
 				{
 					labels.push_back(increment);
@@ -57,7 +58,8 @@ namespace FaceVerificationSystem
 				names.push_back(name);
 				increment++;
 			}
-
+			eigenFace = new Eigenfaces(images, labels, num_components);
+			fisherFace = new Fisherfaces(images, labels, num_components);
 		}
 		
 	protected:
@@ -166,26 +168,23 @@ namespace FaceVerificationSystem
 		{
 			imwrite( "Gray_Image.jpg", frame );
 		}
-	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
-			 {
-					cap >> frame;
-					imshow("Webcam", frame);
-					if (waitKey(30) >= 0) 
-					{
-						imshow("Capture", frame);
-					}
-			 }
-	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 }
-private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e)
-		 {
+		private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
+		{
+			cap >> frame;
+			imshow("Webcam", frame);
+		}
+		private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+		}
+		private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e)
+		{
 			cap >> frame;
 			
 			Mat testImage;
 			cv::cvtColor(frame, testImage, CV_RGB2GRAY);
 			
-			//label1->Text = "Eigenfaces results: " + Convert::ToString(eigenFace.predict(testImage));
-			//label2->Text = "Fisherfaces results: " + Convert::ToString(fisherFace.predict(testImage));
+			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(testImage)].c_str());
+			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(testImage)].c_str());
 		 }
 };
 }
