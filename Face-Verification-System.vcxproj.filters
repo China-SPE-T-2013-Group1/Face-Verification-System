@@ -74,9 +74,6 @@
     <ClInclude Include="fisherfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eigenfaces.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EigenvalueDecomposition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lbp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eigenfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,7 +16,7 @@ static VideoCapture cap(0);
 static vector<Mat> images;
 static vector<String> names ;
 static vector<int> labels;
-static int num_components = 3;
+static int num_components = 10;
 static Eigenfaces* eigenFace;
 static Fisherfaces* fisherFace;
 
@@ -60,6 +60,7 @@ namespace FaceVerificationSystem
 			}
 			eigenFace = new Eigenfaces(images, labels, num_components);
 			fisherFace = new Fisherfaces(images, labels, num_components);
+			// testYale(eigenFace, fisherFace);
 		}
 		
 	protected:
@@ -79,6 +80,7 @@ namespace FaceVerificationSystem
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Timer^  recognitionTimer;
+
 
 	private: System::ComponentModel::IContainer^  components;
 	protected: 
