@@ -102,7 +102,14 @@ int cv::Eigenfaces::predict(InputArray _src) const {
     int label;
     double dummy;
     predict(_src, label, dummy);
-    return label;
+	if (dummy < 10000)
+	{
+		return label;
+	}
+	else
+	{
+		return (this->_labels[this->_labels.size()-1] + 1);
+	}
 }
 
 void cv::Eigenfaces::load(const FileStorage& fs) {
@@ -188,7 +195,14 @@ int cv::Fisherfaces::predict(InputArray _src) const {
     int label;
     double dummy;
     predict(_src, label, dummy);
-    return label;
+	if (dummy < 10000)
+	{
+		return label;
+	}
+	else
+	{
+		return (this->_labels[this->_labels.size()-1] + 1);
+	}
 }
 
 void cv::Fisherfaces::predict(InputArray _src, int &minClass, double &minDist) const {

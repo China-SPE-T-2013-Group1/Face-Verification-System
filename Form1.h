@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fstream>
+#include <vcclr.h>
 
 using namespace cv;
 
@@ -20,6 +21,7 @@ static int num_components = 10;
 static Eigenfaces* eigenFace;
 static Fisherfaces* fisherFace;
 
+//using namespace System::Runtime::InteropServices;
 
 namespace FaceVerificationSystem
 {
@@ -58,9 +60,10 @@ namespace FaceVerificationSystem
 				names.push_back(name);
 				increment++;
 			}
+			names.push_back("Not recognized");
 			eigenFace = new Eigenfaces(images, labels, num_components);
 			fisherFace = new Fisherfaces(images, labels, num_components);
-			// testYale(eigenFace, fisherFace);
+			// testYale3(eigenFace, fisherFace);
 		}
 		
 	protected:
@@ -80,6 +83,7 @@ namespace FaceVerificationSystem
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Timer^  recognitionTimer;
+	private: System::Windows::Forms::TextBox^  textBox1;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -103,13 +107,14 @@ namespace FaceVerificationSystem
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->recognitionTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(202, 95);
+			this->button1->Location = System::Drawing::Point(18, 95);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(110, 38);
+			this->button1->Size = System::Drawing::Size(95, 20);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Train";
 			this->button1->UseVisualStyleBackColor = true;
@@ -150,11 +155,19 @@ namespace FaceVerificationSystem
 			this->recognitionTimer->Interval = 1000;
 			this->recognitionTimer->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick_1);
 			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(130, 95);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 3;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(330, 152);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
@@ -168,7 +181,16 @@ namespace FaceVerificationSystem
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			imwrite( "Gray_Image.jpg", frame );
+			char a[1];
+			System::String^ noms = this->textBox1->Text;
+			char* nomc = (char*)(void*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(noms);
+			sprintf(a, "%d", noOfImages(nomc) + 1);
+
+			System::String^ str = "Training set/" + this->textBox1->Text + "/";
+			char* str2 = (char*)(void*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(str);
+			strcat(str2, a);
+			strcat(str2, ".jpg");
+			imwrite(str2, frame);
 		}
 		private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 		{

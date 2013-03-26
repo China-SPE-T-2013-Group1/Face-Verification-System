@@ -1,7 +1,7 @@
-﻿Build started 24/03/2013 15:51:02.
+﻿Build started 26/03/2013 17:08:24.
      1>Project "C:\Documents and Settings\admin\Mes documents\Visual Studio 2010\Projects\Face-Verification-System\Face-Verification-System.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\Face-Verification-System.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\Face-Verification-System.unsuccessfulbuild".
        GenerateTargetFrameworkMonikerAttribute:
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
@@ -3399,7 +3399,8 @@
          	un intrinsèque non pris en charge a été trouvé dans le code managé
          All outputs are up-to-date.
        CoreResGen:
-         All outputs are up-to-date.
+         "C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,Debug\FaceVerificationSystem.Form1.resources
+         Processing resource file "Form1.resX" into "Debug\FaceVerificationSystem.Form1.resources".
        ResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -3428,4 +3429,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.25
+Time Elapsed 00:00:07.14
