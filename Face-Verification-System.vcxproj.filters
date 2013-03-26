@@ -19,6 +19,12 @@
     <None Include="app.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="haarcascade_frontalface_alt2.xml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="haarcascade_eye_tree_eyeglasses.xml">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Face-Verification-System.cpp">

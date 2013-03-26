@@ -2,6 +2,7 @@
 
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
 #include "facerec.hpp"
 #include "tools.h"
 #include <stdlib.h>
@@ -13,6 +14,7 @@
 using namespace cv;
 
 static Mat frame;
+static Mat faceFrame;
 static VideoCapture cap(0);
 static vector<Mat> images;
 static vector<String> names ;
@@ -20,6 +22,11 @@ static vector<int> labels;
 static int num_components = 10;
 static Eigenfaces* eigenFace;
 static Fisherfaces* fisherFace;
+
+static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
+static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+static CascadeClassifier face_cascade;
+static CascadeClassifier eyes_cascade;
 
 //using namespace System::Runtime::InteropServices;
 
@@ -42,6 +49,8 @@ namespace FaceVerificationSystem
 		Form1(void)
 		{
 			InitializeComponent();
+			face_cascade.load(face_cascade_name);
+			eyes_cascade.load(eyes_cascade_name);
 			string name;
 			vector<Mat> newPerson;
 			int increment = 0;
@@ -176,7 +185,6 @@ namespace FaceVerificationSystem
 			this->Text = L"Face verification system";
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
@@ -204,6 +212,9 @@ namespace FaceVerificationSystem
 		{
 			cap >> frame;
 			
+			faceFrame = showNormalizeFace(detectionAndDisplay(frame, face_cascade, eyes_cascade), frame);
+			imshow("Test5", faceFrame);
+
 			Mat testImage;
 			cv::cvtColor(frame, testImage, CV_RGB2GRAY);
 			

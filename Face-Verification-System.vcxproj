@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.ico" />
+    <None Include="haarcascade_eye_tree_eyeglasses.xml" />
+    <None Include="haarcascade_frontalface_alt2.xml" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
