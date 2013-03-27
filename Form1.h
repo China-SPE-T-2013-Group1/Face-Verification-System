@@ -23,12 +23,17 @@ static int num_components = 10;
 static Eigenfaces* eigenFace;
 static Fisherfaces* fisherFace;
 
+static Mat testImage;
+static Mat test1(150, 150, CV_8UC3);
+
 static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
 static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
 static CascadeClassifier face_cascade;
 static CascadeClassifier eyes_cascade;
 
-//using namespace System::Runtime::InteropServices;
+#include <iostream>
+#include "cv.h"
+#include "highgui.h"
 
 namespace FaceVerificationSystem
 {
@@ -38,10 +43,6 @@ namespace FaceVerificationSystem
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
-	/// <summary>
-	/// Summary for Form1
-	/// </summary>
 
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
@@ -132,7 +133,7 @@ namespace FaceVerificationSystem
 			// aquisitionTimer
 			// 
 			this->aquisitionTimer->Enabled = true;
-			this->aquisitionTimer->Interval = 200;
+			this->aquisitionTimer->Interval = 250;
 			this->aquisitionTimer->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
 			// label1
@@ -185,6 +186,7 @@ namespace FaceVerificationSystem
 			this->Text = L"Face verification system";
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
@@ -211,15 +213,14 @@ namespace FaceVerificationSystem
 		private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e)
 		{
 			cap >> frame;
-			
-			faceFrame = showNormalizeFace(detectionAndDisplay(frame, face_cascade, eyes_cascade), frame);
-			imshow("Test5", faceFrame);
 
-			Mat testImage;
-			cv::cvtColor(frame, testImage, CV_RGB2GRAY);
+			faceFrame = showNormalizeFace(detectionAndDisplay(frame, face_cascade, eyes_cascade), frame);
+			resize(faceFrame, faceFrame, test1.size(), 0, 0, INTER_NEAREST);
+
+			imshow("Normalized face", faceFrame);
 			
-			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(testImage)].c_str());
-			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(testImage)].c_str());
+			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(frame)].c_str());
+			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(frame)].c_str());
 		 }
 };
 }

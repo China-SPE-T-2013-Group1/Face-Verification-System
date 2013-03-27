@@ -8,6 +8,9 @@
 #include "helper.hpp"
 #include "lbp.hpp"
 
+#include "opencv2/objdetect/objdetect.hpp"
+
+
 using namespace std;
 
 namespace cv {
@@ -22,7 +25,7 @@ public:
     virtual void train(InputArray src, InputArray labels) = 0;
 
     // Gets a prediction from a FaceRecognizer.
-    virtual int predict(InputArray src) const = 0;
+    virtual int predict(Mat src) const = 0;
 
     // Gets a prediction from a FaceRecognizer.
     virtual void predict(InputArray src, int &label, double &confidence) const = 0;
@@ -79,7 +82,7 @@ public:
     void train(InputArray src, InputArray labels);
 
     // Predicts the label of a query image in src.
-    int predict(const InputArray src) const;
+    int predict(const Mat src) const;
 
     // Returns the predicted label and confidence for the prediction.
     void predict(InputArray src, int &label, double &confidence) const;
@@ -153,7 +156,7 @@ public:
     void train(InputArray src, InputArray labels);
 
     // Predicts the label of a query image in src.
-    int predict(InputArray src) const;
+    int predict(Mat src) const;
 
     // Returns the predicted label and confidence for the prediction.
     void predict(InputArray src, int &label, double &confidence) const;
@@ -270,5 +273,10 @@ public:
 };
 
 }
+
+std::vector<Rect> detectionAndDisplay(Mat frame, CascadeClassifier face_cascade, CascadeClassifier eyes_cascade);
+
+Mat showNormalizeFace(vector<Rect> detectedfaces, Mat frame);
+
 
 #endif

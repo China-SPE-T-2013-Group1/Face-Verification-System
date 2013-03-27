@@ -3,6 +3,31 @@
 #include "helper.hpp"
 #include "decomposition.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
+
+
+// A nettoyer !!!!
+
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
+
+using namespace cv;
+
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+#include <fstream>
+
+
+
+static Mat test1(150, 150, CV_8UC3);
+
+static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
+static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+static CascadeClassifier face_cascade;
+static CascadeClassifier eyes_cascade;
+
+static Mat size(150, 150, CV_8UC3);
 
 //------------------------------------------------------------------------------
 // cv::FaceRecognizer
@@ -98,10 +123,19 @@ void cv::Eigenfaces::predict(InputArray _src, int &minClass, double &minDist) co
     }
 }
 
-int cv::Eigenfaces::predict(InputArray _src) const {
+int cv::Eigenfaces::predict(Mat _src) const {
     int label;
     double dummy;
-    predict(_src, label, dummy);
+
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
+	Mat faceFrame;
+
+	faceFrame = showNormalizeFace(detectionAndDisplay(_src, face_cascade, eyes_cascade), _src);
+	resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+
+    predict(faceFrame, label, dummy);
 	if (dummy < 10000)
 	{
 		return label;
@@ -191,10 +225,18 @@ void cv::Fisherfaces::train(InputArray src, InputArray _lbls) {
     }
 }
 
-int cv::Fisherfaces::predict(InputArray _src) const {
+int cv::Fisherfaces::predict(Mat _src) const {
     int label;
     double dummy;
-    predict(_src, label, dummy);
+
+	Mat faceFrame;
+
+	faceFrame = showNormalizeFace(detectionAndDisplay(_src, face_cascade, eyes_cascade), _src);
+	resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+
+    predict(faceFrame, label, dummy);
+	
+	
 	if (dummy < 10000)
 	{
 		return label;
