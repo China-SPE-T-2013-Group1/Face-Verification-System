@@ -5,6 +5,7 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "facerec.hpp"
 #include "tools.h"
+#include "tests.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -24,7 +25,7 @@ static Eigenfaces* eigenFace;
 static Fisherfaces* fisherFace;
 
 static Mat testImage;
-static Mat test1(150, 150, CV_8UC3);
+static Mat size(150, 150, CV_8UC3);
 
 static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
 static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
@@ -34,6 +35,8 @@ static CascadeClassifier eyes_cascade;
 #include <iostream>
 #include "cv.h"
 #include "highgui.h"
+
+extern int mode;
 
 namespace FaceVerificationSystem
 {
@@ -49,6 +52,7 @@ namespace FaceVerificationSystem
 	public:
 		Form1(void)
 		{
+			mode = false;
 			InitializeComponent();
 			face_cascade.load(face_cascade_name);
 			eyes_cascade.load(eyes_cascade_name);
@@ -61,7 +65,9 @@ namespace FaceVerificationSystem
 			{
 				getline(file,name);
 				newPerson = openTrainingSet(name);
-				images.insert(images.end(),newPerson.begin(),newPerson.end());
+				normalImages.insert(normalImages.end(),newPerson.begin(),newPerson.end());
+				newPerson = openTrainingSet(name);
+				detectedImages.insert(detectedImages.end(),newPerson.begin(),newPerson.end());
 				int a = noOfImages(name);
 				for(int i=0;i < noOfImages(name); i++)
 				{
@@ -71,11 +77,12 @@ namespace FaceVerificationSystem
 				increment++;
 			}
 			names.push_back("Not recognized");
+			images = normalImages;
 			eigenFace = new Eigenfaces(images, labels, num_components);
 			fisherFace = new Fisherfaces(images, labels, num_components);
-			// testYale3(eigenFace, fisherFace);
+			//testYale3(eigenFace, fisherFace);
 		}
-		
+
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -94,6 +101,7 @@ namespace FaceVerificationSystem
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Timer^  recognitionTimer;
 	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::CheckBox^  checkBox1;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -118,11 +126,12 @@ namespace FaceVerificationSystem
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->recognitionTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(18, 95);
+			this->button1->Location = System::Drawing::Point(18, 106);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(95, 20);
 			this->button1->TabIndex = 0;
@@ -167,16 +176,28 @@ namespace FaceVerificationSystem
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(130, 95);
+			this->textBox1->Location = System::Drawing::Point(130, 106);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 3;
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(18, 83);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(101, 17);
+			this->checkBox1->TabIndex = 4;
+			this->checkBox1->Text = L"Detection mode";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(330, 152);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -202,25 +223,54 @@ namespace FaceVerificationSystem
 			strcat(str2, ".jpg");
 			imwrite(str2, frame);
 		}
-		private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
+		
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e)
 		{
 			cap >> frame;
+
+			detectionAndDisplay(frame, face_cascade, eyes_cascade);
+
 			imshow("Webcam", frame);
 		}
+
 		private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 		}
 		private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e)
 		{
 			cap >> frame;
-
+		
+		if (mode == 1)
+		{
 			faceFrame = showNormalizeFace(detectionAndDisplay(frame, face_cascade, eyes_cascade), frame);
-			resize(faceFrame, faceFrame, test1.size(), 0, 0, INTER_NEAREST);
-
-			imshow("Normalized face", faceFrame);
-			
-			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(frame)].c_str());
-			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(frame)].c_str());
+			resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+			imshow("test", faceFrame);
+		}
+		else
+		{
+			faceFrame = frame;
+			cvtColor(faceFrame, faceFrame, CV_BGR2GRAY);
+			imshow("test", frame);
+		}	
+			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(faceFrame)].c_str());
+			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(faceFrame)].c_str());
+		 }
+private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+		 {
+			if (mode == false)
+			{
+				mode = true;
+				images = detectedImages;
+				button1->Text = "true";
+			}
+			else
+			{
+				mode = false;
+				images = normalImages;
+				button1->Text = "false";
+			}
+			eigenFace->train(images, labels);
+			fisherFace->train(images, labels);
 		 }
 };
 }

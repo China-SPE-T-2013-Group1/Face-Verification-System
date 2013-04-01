@@ -5,7 +5,6 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/objdetect/objdetect.hpp"
 
-
 // A nettoyer !!!!
 
 #include "opencv2/highgui/highgui.hpp"
@@ -18,16 +17,13 @@ using namespace cv;
 #include<string.h>
 #include <fstream>
 
-
-
 static Mat test1(150, 150, CV_8UC3);
+static Mat size(150, 150, CV_8UC3);
 
 static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
 static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
 static CascadeClassifier face_cascade;
 static CascadeClassifier eyes_cascade;
-
-static Mat size(150, 150, CV_8UC3);
 
 //------------------------------------------------------------------------------
 // cv::FaceRecognizer
@@ -132,7 +128,8 @@ int cv::Eigenfaces::predict(Mat _src) const {
 
 	Mat faceFrame;
 
-	faceFrame = showNormalizeFace(detectionAndDisplay(_src, face_cascade, eyes_cascade), _src);
+	faceFrame = _src;
+
 	resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
 
     predict(faceFrame, label, dummy);
@@ -229,14 +226,17 @@ int cv::Fisherfaces::predict(Mat _src) const {
     int label;
     double dummy;
 
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
 	Mat faceFrame;
 
-	faceFrame = showNormalizeFace(detectionAndDisplay(_src, face_cascade, eyes_cascade), _src);
+	faceFrame = _src;
 	resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
-
+	//imshow("test", faceFrame);
+	
     predict(faceFrame, label, dummy);
-	
-	
+		
 	if (dummy < 10000)
 	{
 		return label;
@@ -386,4 +386,63 @@ void cv::LBPH::predict(InputArray _src, int &minClass, double &minDist) const {
             minClass = _labels[sampleIdx];
         }
     }
+}
+
+std::vector<Rect> detectionAndDisplay(Mat frame, CascadeClassifier face_cascade, CascadeClassifier eyes_cascade)
+{
+    std::vector<Rect> faces;
+    Mat frame_gray;
+	Mat b = frame;
+	std::vector<Rect>  retour;
+
+    cvtColor(frame, frame_gray, CV_BGR2GRAY);
+    equalizeHist(frame_gray, frame_gray);
+
+    //-- Detect faces
+    face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0, Size(80, 80));
+
+	retour = faces;
+
+    for (int i = 0; i < faces.size(); i++)
+    {
+        Mat faceROI = frame_gray( faces[i] );
+        std::vector<Rect> eyes;
+        //-- In each face, detect eyes
+        eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
+
+		/*if( eyes.size() == 2)
+        {
+            //-- Draw the face
+            Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
+            ellipse( frame, center, Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 0 ), 2, 8, 0 );
+            for( int j = 0; j < eyes.size(); j++ )
+            { //-- Draw the eyes
+                Point center( faces[i].x + eyes[j].x + eyes[j].width*0.5, faces[i].y + eyes[j].y + eyes[j].height*0.5 ); 
+                int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
+                circle( frame, center, radius, Scalar( 255, 0, 255 ), 3, 8, 0 );
+            }
+        }*/
+    } 
+	return retour;
+}
+
+Mat showNormalizeFace(vector<Rect> detectedfaces, Mat frame)
+{
+	Mat faceROI;
+	Mat frame1;
+
+	if (detectedfaces.size() > 0)
+	{
+		Mat frame_gray;
+		cvtColor(frame, frame_gray, CV_BGR2GRAY);
+		equalizeHist(frame_gray, frame_gray);
+		faceROI = frame_gray(detectedfaces[0]);
+		cv::resize(faceROI, faceROI, frame.size());
+		//imshow("Normalized face", faceROI);
+		return faceROI;
+	}
+	cvtColor(frame, frame1, CV_BGR2GRAY);
+	imshow("Normalized face", frame1);
+	return frame1;
+	
 }

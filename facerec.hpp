@@ -10,6 +10,11 @@
 
 #include "opencv2/objdetect/objdetect.hpp"
 
+//static int mode;
+static vector<Mat> normalImages;
+static vector<Mat> detectedImages;
+
+static int mode;
 
 using namespace std;
 
@@ -56,7 +61,6 @@ private:
     Mat _eigenvectors;
     Mat _eigenvalues;
     Mat _mean;
-
 
 public:
     using FaceRecognizer::save;
@@ -269,7 +273,6 @@ public:
     // Sets the threshold used in this cv::LBPH.
     void setThreshold(double threshold) { _threshold = threshold; }
 
-
 };
 
 }
@@ -277,6 +280,5 @@ public:
 std::vector<Rect> detectionAndDisplay(Mat frame, CascadeClassifier face_cascade, CascadeClassifier eyes_cascade);
 
 Mat showNormalizeFace(vector<Rect> detectedfaces, Mat frame);
-
 
 #endif

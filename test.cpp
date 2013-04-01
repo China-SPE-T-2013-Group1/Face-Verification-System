@@ -1,14 +1,3 @@
-/*#include "stdafx.h"
-#include "tests.h"
-#include "facerec.hpp"
-#include "tools.h"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/objdetect/objdetect.hpp"
-using namespace cv;*/
-
-
-
 #include "stdafx.h"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -21,9 +10,22 @@ using namespace cv;
 #include<string.h>
 #include <fstream>
 
+static Mat faceFrame;
+
+static Mat test1(150, 150, CV_8UC3);
+static Mat size(150, 150, CV_8UC3);
+
+static string face_cascade_name = "haarcascade_frontalface_alt2.xml";
+static string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+static CascadeClassifier face_cascade;
+static CascadeClassifier eyes_cascade;
+
 // Function to test the program using the Yale database
 void testYale(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 {
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
 	FILE * file;
 	file = fopen("YaleDatabaseTestResults.csv","w");
 	string imageName = "Test";
@@ -31,6 +33,7 @@ void testYale(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 	char jChar[4];
 	int predict;
 	char predictChar[1];
+	Mat image1;
 	Mat image;
 	
 	string a = "Training set/Yale";
@@ -49,14 +52,19 @@ void testYale(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 			fputs(jChar, file);
 			fputs(";", file);
 
-			image = imread(a + jChar + b + iChar + c, CV_LOAD_IMAGE_GRAYSCALE);		
-			
-			predict = eigenFace->predict(image) + 1;
+			image = imread(a + jChar + b + iChar + c);
+
+			//imshow(a + jChar + b + iChar + c, image);
+
+			faceFrame = showNormalizeFace(detectionAndDisplay(image, face_cascade, eyes_cascade), image);
+			//resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+
+			predict = eigenFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs(";", file);
 
-			predict = fisherFace->predict(image) + 1;
+			predict = fisherFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs("\n", file);
@@ -67,13 +75,17 @@ void testYale(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 
 void testYale2(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 {
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
 	FILE * file;
-	file = fopen("YaleDatabaseTestResults2.csv","w");
+	file = fopen("YaleDatabaseTestResults.csv","w");
 	string imageName = "Test";
 	char iChar[4];
 	char jChar[4];
 	int predict;
 	char predictChar[1];
+	Mat image1;
 	Mat image;
 	
 	string a = "Training set/Yale";
@@ -92,14 +104,19 @@ void testYale2(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 			fputs(jChar, file);
 			fputs(";", file);
 
-			image = imread(a + jChar + b + iChar + c, CV_LOAD_IMAGE_GRAYSCALE);		
-			
-			predict = eigenFace->predict(image) + 1;
+			image = imread(a + jChar + b + iChar + c);
+
+			//imshow(a + jChar + b + iChar + c, image);
+
+			faceFrame = showNormalizeFace(detectionAndDisplay(image, face_cascade, eyes_cascade), image);
+			//resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+
+			predict = eigenFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs(";", file);
 
-			predict = fisherFace->predict(image) + 1;
+			predict = fisherFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs("\n", file);
@@ -110,13 +127,17 @@ void testYale2(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 
 void testYale3(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 {
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
 	FILE * file;
-	file = fopen("YaleDatabaseTestResults3.csv","w");
+	file = fopen("YaleDatabaseTestResults.csv","w");
 	string imageName = "Test";
 	char iChar[4];
 	char jChar[4];
 	int predict;
 	char predictChar[1];
+	Mat image1;
 	Mat image;
 	
 	string a = "Training set/Yale";
@@ -135,14 +156,19 @@ void testYale3(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 			fputs(jChar, file);
 			fputs(";", file);
 
-			image = imread(a + jChar + b + iChar + c, CV_LOAD_IMAGE_GRAYSCALE);		
-			
-			predict = eigenFace->predict(image) + 1;
+			image = imread(a + jChar + b + iChar + c);
+
+			//imshow(a + jChar + b + iChar + c, image);
+
+			faceFrame = showNormalizeFace(detectionAndDisplay(image, face_cascade, eyes_cascade), image);
+			//resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
+
+			predict = eigenFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs(";", file);
 
-			predict = fisherFace->predict(image) + 1;
+			predict = fisherFace->predict(faceFrame) + 1;
 			sprintf(predictChar, "%d", predict);
 			fputs(predictChar, file);
 			fputs("\n", file);

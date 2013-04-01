@@ -25,6 +25,40 @@ vector<Mat> openTrainingSet(string name)
 	face_cascade.load(face_cascade_name);
 	eyes_cascade.load(eyes_cascade_name);
 
+	Mat image;
+	Mat faceFrame;
+
+	int imageNumberInt = 1;
+	char imageNumberString[4];
+	sprintf(imageNumberString, "%d", imageNumberInt);
+	
+	vector<Mat> out;
+	image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");	
+	//resize(image, image, size.size(), 0, 0, INTER_NEAREST);
+	//cvtColor(image, image, CV_BGR2GRAY);
+
+	while (image.data)
+	{
+		image = showNormalizeFace(detectionAndDisplay(image, face_cascade, eyes_cascade), image);
+		resize(image, image, size.size(), 0, 0, INTER_NEAREST);
+	//	cvtColor(image, image, CV_BGR2GRAY);
+		out.push_back(image);
+		imshow(name, image);
+		imageNumberInt++;
+		sprintf(imageNumberString, "%d", imageNumberInt);
+		
+		image = imread("Training set/" + name + "/" + imageNumberString + ".jpg");
+	}
+
+	Mat a;
+	return out;
+}
+
+vector<Mat> openTrainingSet2(string name)
+{
+	face_cascade.load(face_cascade_name);
+	eyes_cascade.load(eyes_cascade_name);
+
 	Mat faceFrame;
 	Mat image;
 
@@ -38,7 +72,8 @@ vector<Mat> openTrainingSet(string name)
 	faceFrame = showNormalizeFace(detectionAndDisplay(image, face_cascade, eyes_cascade), image);
 	resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
 
-	imshow(name, faceFrame);
+
+//	imshow(name, faceFrame);
 
 	while (image.data)
 	{
@@ -75,7 +110,7 @@ int noOfImages(string name) {
 	return (imageNumberInt - 1);
 }
 
-std::vector<Rect> detectionAndDisplay(Mat frame, CascadeClassifier face_cascade, CascadeClassifier eyes_cascade)
+std::vector<Rect> detectionAndDisplay2(Mat frame, CascadeClassifier face_cascade, CascadeClassifier eyes_cascade)
 {
     std::vector<Rect> faces;
     Mat frame_gray;
@@ -103,12 +138,12 @@ std::vector<Rect> detectionAndDisplay(Mat frame, CascadeClassifier face_cascade,
                 int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
                 circle( frame, center, radius, Scalar( 255, 0, 255 ), 3, 8, 0 );
             }*/
-         }
-    } 
+        }
+    }
 	return faces;
 }
 
-Mat showNormalizeFace(vector<Rect> detectedfaces, Mat frame)
+Mat showNormalizeFace2(vector<Rect> detectedfaces, Mat frame)
 {
 	Mat faceROI;
 	Mat frame1;
