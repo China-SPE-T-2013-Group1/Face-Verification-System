@@ -212,6 +212,7 @@ namespace FaceVerificationSystem
 #pragma endregion
 		private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 		{
+			imshow("teste", eigenFace->mean());
 			char a[1];
 			System::String^ noms = this->textBox1->Text;
 			char* nomc = (char*)(void*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(noms);
@@ -244,13 +245,13 @@ private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e
 		{
 			faceFrame = showNormalizeFace(detectionAndDisplay(frame, face_cascade, eyes_cascade), frame);
 			resize(faceFrame, faceFrame, size.size(), 0, 0, INTER_NEAREST);
-			imshow("test", faceFrame);
+			imshow("Normalized face", faceFrame);
 		}
 		else
 		{
 			faceFrame = frame;
 			cvtColor(faceFrame, faceFrame, CV_BGR2GRAY);
-			imshow("test", frame);
+			imshow("Normalized face", frame);
 		}	
 			label1->Text = "Eigenfaces results: " + gcnew System::String(names[eigenFace->predict(faceFrame)].c_str());
 			label2->Text = "Fisherfaces results: " + gcnew System::String(names[fisherFace->predict(faceFrame)].c_str());
@@ -261,13 +262,11 @@ private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::
 			{
 				mode = true;
 				images = detectedImages;
-				button1->Text = "true";
 			}
 			else
 			{
 				mode = false;
 				images = normalImages;
-				button1->Text = "false";
 			}
 			eigenFace->train(images, labels);
 			fisherFace->train(images, labels);

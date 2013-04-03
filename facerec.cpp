@@ -442,7 +442,7 @@ Mat showNormalizeFace(vector<Rect> detectedfaces, Mat frame)
 		return faceROI;
 	}
 	cvtColor(frame, frame1, CV_BGR2GRAY);
-	imshow("Normalized face", frame1);
+	//imshow("Normalized face", frame1);
 	return frame1;
 	
 }

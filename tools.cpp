@@ -43,7 +43,7 @@ vector<Mat> openTrainingSet(string name)
 		resize(image, image, size.size(), 0, 0, INTER_NEAREST);
 	//	cvtColor(image, image, CV_BGR2GRAY);
 		out.push_back(image);
-		imshow(name, image);
+		//imshow(name, image);
 		imageNumberInt++;
 		sprintf(imageNumberString, "%d", imageNumberInt);
 		

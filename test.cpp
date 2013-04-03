@@ -42,10 +42,10 @@ void testYale(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 	
 	fputs("Original;Eigenfaces;Fisherfaces\n", file);
 
-	for (int j = 1; j < 16; j++)
+	for (int j = 1; j < 6; j++)
 	{
 		sprintf(jChar, "%d", j);
-		for (int i = 1; i < 12; i++)
+		for (int i = 1; i < 13; i++)
 		{
 			sprintf(iChar, "%d", i);
 			
@@ -94,10 +94,10 @@ void testYale2(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 	
 	fputs("Original;Eigenfaces;Fisherfaces\n", file);
 
-	for (int j = 1; j < 16; j++)
+	for (int j = 1; j < 6; j++)
 	{
 		sprintf(jChar, "%d", j);
-		for (int i = 12; i < 13; i++)
+		for (int i = 12; i < 14; i++)
 		{
 			sprintf(iChar, "%d", i);
 			
@@ -146,10 +146,10 @@ void testYale3(Eigenfaces* eigenFace, Fisherfaces* fisherFace)
 	
 	fputs("Original;Eigenfaces;Fisherfaces\n", file);
 
-	for (int j = 1; j < 16; j++)
+	for (int j = 1; j < 11; j++)
 	{
 		sprintf(jChar, "%d", j);
-		for (int i = 8; i < 13; i++)
+		for (int i = 7; i < 12; i++)
 		{
 			sprintf(iChar, "%d", i);
 			
